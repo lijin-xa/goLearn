@@ -1,20 +1,18 @@
 /*
 * 基础语法规则 条件语句等等
 */
-package main
+package syntax
 
 import (
 	"fmt"
 	"math"
 )
 
-// Go语言而言 左括号必须和关键字在一行
-func main() {
-
+// 入口程序
+func Start() {
 	if true {
 		fmt.Println("this is my first condition syntax")
-	// 前段代码块的右括号必须和关键字 else/else if 在同一行
-	} else {
+	} else {     // 前段代码块的右括号必须和关键字 else/else if 在同一行
 		fmt.Println("no some")
 	}
 
@@ -38,7 +36,7 @@ func main() {
 	//switch case
 	switchSyntax()
 
-	//额外练习
+	// 额外练习
 	//mathMethod()
 }
 
@@ -70,7 +68,6 @@ func Connect() interface{} {
 
 // for 一些特殊格式 冒泡排序
 func LoopSyntax() {
-
 	// 不支持while do-while语句
 	sum := 1
 	// for i := 1; i < 10; i++ {
@@ -111,7 +108,6 @@ func LoopSyntax() {
 
 // 9*9乘法表
 func MultiTable() {
-
 	outerLoop:
 	for i := 1; i <= 9; i++ {
 		for j := 1; j <= i; j++ {
@@ -134,7 +130,6 @@ func MultiTable() {
 
 // range 实现 key - value遍历
 func keyValueIterator() {
-
 	str := []string {"go", "syntax", "iterator"}
 	for k, v :=  range str {
 		fmt.Println(k, v)
@@ -162,7 +157,6 @@ func keyValueIterator() {
 * fallthrough 可以兼容一些移植代码 - 具体使用未有概念
 */
 func switchSyntax() {
-
 	var temp = "go"
 	switch temp {
 

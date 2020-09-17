@@ -1,10 +1,10 @@
 // container 语言容器 - 数组（array）多维数据 切片（slice）
-package main
+package container
 
 import "fmt"
 
-func main(){
-
+// 入口程序
+func Start(){
 	/*
 	* arr arrayValue
 	* [3]int{1, 2, 3} [3]数组长度
@@ -40,10 +40,10 @@ func main(){
 	fmt.Println(tempArr[0:2])
 	tempArr1 := tempArr[0:2]
 
-	//和原切片一致
+	// 和原切片一致
 	tempArr2 := tempArr[:]
 
-	//重置切片 输出[]
+	// 重置切片 输出[]
 	tempArr3 := tempArr[0:0]
 	fmt.Println(len(tempArr1))
 	fmt.Println(tempArr2)
@@ -59,7 +59,7 @@ func main(){
 	strList = append(strList, "go")
 	strList = append(strList, "container")
 
-	//往切片的头部插入数据 但效率很差 会将已有元素再复制一次
+	// 往切片的头部插入数据 但效率很差 会将已有元素再复制一次
 	strList = append([]string{"no"}, strList...)
 
 	/*

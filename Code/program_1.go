@@ -1,5 +1,5 @@
-// 简单的聊天对话程序
-package main
+// 一些独立的程序包
+package code
 
 import (
 	"bufio"
@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-func main () {
-
+// 简单的聊天对话程序
+func SimpleChat () {
 	// 准备从标准输入读取数据
 	inputReader := bufio.NewReader(os.Stdin)
 	fmt.Println("Please input your name: ")
@@ -48,11 +48,12 @@ func main () {
 	}
 }
 
-// 运行效果
-// Please input your name:
-// go
-// Hello, go! what can i do for you ?
-// a piece of cake
-// Sorry, I ditn't catch you
-// bye
-// bye bye!
+/* 运行效果
+Please input your name:
+go
+Hello, go! what can i do for you ?
+a piece of cake
+Sorry, I ditn't catch you
+bye
+bye bye!
+*/

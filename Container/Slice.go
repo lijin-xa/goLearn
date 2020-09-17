@@ -1,17 +1,17 @@
 /*
 * 切片 Slice 基础概念
 */
-package main
+package container
 
 import "fmt"
 
-func main(){
-
+// 入口程序
+func StartSlice(){
 	var str string = "hello use Printf"
 	// %T输出 数据类型 %v输出值
 	fmt.Printf("%T, %v\n", str, str)
 
-	/**
+	/*
 	* 切片复制 copy()
 	* 签名 copy(destSlice, srcSlice[]T) int 将srcSlice复制到desSlice
 	* @param destSlice 复制的目标

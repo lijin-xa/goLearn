@@ -1,18 +1,18 @@
-/**
+/*
 * map映射 和STL map容器类似
 * pair<key, value> go 无须集合 - STL类模板
 * 声明一个map var mapName map[keyType]valueType
 */
 
-package main
+package container
 
 import (
 	"fmt"
 	"sync"
 )
 
-func main(){
-
+// 入口程序
+func StartMap(){
 	// 声明一个map key - string value - int
 	// var mapList map[string]int
 
@@ -32,21 +32,24 @@ func main(){
 		fmt.Println(k, v)
 	}
 
+
 	/*
 	* go并没有提高清空map的接口， 直接使用make重新建立一个新map
 	* go并行垃圾回收的效率比写一个清空map函数效率要高的多
 	* 多键值索引 目前只是做大概阅读
 	*/
 
-	// 实例化一个map 键类型int 值类型*Profile
-	// 自主生成哈希值 来实现多键值查询
-	// type Profile struct {
-	//	Name string
-	//	Age int
-	//	Married bool
-	//}
-	// var mapper = make(map[int][] *Profile)
-	// var mapper = make(map[int][] *Profile)
+	/*
+	实例化一个map 键类型int 值类型*Profile
+	自主生成哈希值 来实现多键值查询
+	type Profile struct {
+		Name string
+		Age int
+		Married bool
+	}
+	var mapper = make(map[int][] *Profile)
+	var mapper = make(map[int][] *Profile)
+	*/
 
 	/*
 	* map 在并发情况下 同时读写是线程不安全的， 一般处理并发比如C++进行加锁 mutex，Go1.9版本中加入了sync.Map包 支持并发安全

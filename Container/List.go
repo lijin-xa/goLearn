@@ -4,16 +4,15 @@
 * 如果给列表中放入了一个 interface{} 类型的值
 * 取出值后，如果要将 interface{} 转换为其他类型将会发生宕机
 */
-
-package main
+package container
 
 import (
 	"container/list"
 	"fmt"
 )
 
-func main() {
-
+// 入口程序
+func StartList() {
 	/*
 	* 初始化 list
 	* 1 变量名 := list.New()
