@@ -13,6 +13,7 @@ package main
 
 import (
 	"test/function"
+	_struct "test/struct"
 )
 
 //func init() {
@@ -20,8 +21,7 @@ import (
 //}
 
 func main() {
-	// 调用function包
-	function.Start()
+	callStruct()
 
 	// 输出编写第一个
 	//code.PrintGo()
@@ -29,4 +29,18 @@ func main() {
 	//fmt.Println(num)
 	//fmt.Println(mul.Mul(3, 5))
 	//add.Test()
+}
+
+// 调用 _struct包
+func callStruct() {
+	_struct.Start()
+}
+
+// 调用function包
+func callFunction() {
+	function.Start()
+	function.StartInterface()
+	function.StartClosure()
+	function.StartPanic()
+	function.StartReCover()
 }

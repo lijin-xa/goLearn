@@ -1,3 +1,9 @@
+/*
+函数基础
+func 函数名(形式参数列表) (返回值类型) {
+	函数体
+}
+*/
 package function
 
 import (
@@ -5,19 +11,12 @@ import (
 	"fmt"
 )
 
-/*
-func 函数名(形式参数列表) (返回值类型) {
-	函数体
-}
-*/
-
 // 如果一组形参或者返回值类型相同，不必写出没个参数类型
 // func add1(x, j int)
 // func add2(x int, y int)
 
 // 支持对返回值进行命名 命名的返回值类型为类型的默认值
 func Add() (a, b int) {
-
 	a = 1
 	b = 2
 
@@ -31,7 +30,9 @@ func Start() {
 	// test()
 
 	// 匿名函数
-	anonymous()
+	//anonymous()
+
+	variableArgs(1, 2, 3)
 }
 
 // 函数参数传递
@@ -96,6 +97,39 @@ func anonymous() {
 	}
 
 	// 命令行输入 go run main.go --skill=xx
+}
+
+/* 可变参数 即传入的参数可数是可变的
+* variableArgs 接受不定数量的参数 参数类型均为int型
+* ...type 函数的参数类型存在 - 只能为最后一个参数 == []type
+* 两者之间的区别在于
+* []type 调用者传递实参时需要传递[]int{} - 数组切片
+* ...type 则相对自由，传递任意数量的int型参数即可 variableArgs(1, 2, 3, ...)
+*/
+func variableArgs(args ...int) {
+	for k, v := range args {
+		fmt.Println(k, v)
+	}
+
+	variableArgsAny(1, "go - varibale", 1.23)
+}
+
+
+// 使用interface{} 传递任意类型的可变参数
+func variableArgsAny(args ...interface{}) {
+	for _, arg := range args {
+
+		// arg.(type) - 获取到arg类型 只能在switch内配合case使用
+		switch arg.(type)  {
+		case int:
+			fmt.Println(arg, "is int type")
+		case string:
+			fmt.Println(arg, "is string type")
+		default:
+			fmt.Println(arg, "is unknown type at now")
+		}
+	}
+
 }
 
 
