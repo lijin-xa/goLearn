@@ -2,7 +2,7 @@ package _interface
 
 import "fmt"
 
-//  Go语言接口
+//  Go语言接口基础概念 - 声明，类型与接口
 
 /**
 * 接口是约定的一种合作协议
