@@ -13,6 +13,7 @@ package main
 
 import (
 	"test/function"
+	_interface "test/interface"
 	_struct "test/struct"
 )
 
@@ -21,19 +22,14 @@ import (
 //}
 
 func main() {
-	callStruct()
-
+	callInterface()
+	//callStruct()
 	// 输出编写第一个
 	//code.PrintGo()
 	//num := add.Add(3, 5)
 	//fmt.Println(num)
 	//fmt.Println(mul.Mul(3, 5))
 	//add.Test()
-}
-
-// 调用 _struct包
-func callStruct() {
-	_struct.Start()
 }
 
 // 调用function包
@@ -43,4 +39,16 @@ func callFunction() {
 	function.StartClosure()
 	function.StartPanic()
 	function.StartReCover()
+}
+
+// 调用 _struct包
+func callStruct() {
+	//_struct.Start()
+	_struct.StartOOP()
+}
+
+// 调用 interface包
+func callInterface() {
+	//_interface.Start()
+	_interface.StartSort()
 }
