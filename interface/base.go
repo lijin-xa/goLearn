@@ -69,7 +69,9 @@ func Start() {
 	//test()
 
 	// 测试接口nil之间的判断
-	test1()
+	//test1()
+
+	TypeAssertTest()
 }
 
 // 接口的实现通过类型 类型与接口之间的关系
@@ -100,8 +102,8 @@ func (g *GameService) Start() {
 	fmt.Println("service start")
 }
 
+// 一个类型可以实现多个接口
 func test() {
-
 	// 实例化GameService 赋值给Service接口
 
 	//TODO
@@ -139,10 +141,35 @@ func GetStringer() fmt.Stringer {
 	return s
 }
 
+// 接口类型nil判断
 func test1() {
 	if GetStringer() == nil {
 		fmt.Println("interface nil")
 	} else {
 		fmt.Println("interface type exist", GetStringer())
 	}
+}
+
+/*
+* 类型断言（Type Assertion） 用于检查接口类型变量所持有的值是否实现了期望的接口或者具体的类型
+* value, ok := x.(T)
+* x 接口的类型 T 具体类型 ok 判断x是否是T类型
+* x 是一个具体类型 x的类型和T相同 value为x的动态值
+* x 是一个接口类型 检测成功 x的动态值不会被提取
+* x 是一个nil接口值 类型断言会失败
+*/
+
+// 类型断言测试
+func TypeAssertTest() {
+	var x interface{}
+	x = 10
+	value, ok := x.(int)
+	fmt.Println(value, ok)
+
+	type Service interface {
+	}
+	var s Service = new(GameService)
+	value1, ok1 := s.(interface{})
+
+	fmt.Printf("value Type: %T = %v ok: %+v", value1, value1, ok1)
 }
