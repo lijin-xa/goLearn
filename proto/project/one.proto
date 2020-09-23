@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+// 定义包名
+package one;
+// 可以避免对message类型之间的名字冲突，同名的message可以通过包名来区分
+
+option go_package = "./project/go;one";
+message EnterRoom {
+  uint32 uid = 1;
+  string username = 2;
+  uint32 roomId = 3;
+}
+
+//// 引入其他proto文件
+//import "other.proto";
+//import public "";  // 具有传递性 a.proto引入了第三方文件 b.proto引入a 也会引入第三方文件
+//import weak "";    // weak引入的文件不允许存在 只为了Google内部使用

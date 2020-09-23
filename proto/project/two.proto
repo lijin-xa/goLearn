@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package two;
+
+// 引入one.proto
+import "project/one.proto";
+
+// 指定生成的go包的路径，包名two
+option go_package = "./project/go;two";
+
+message LeaveRoom {
+  // 引入one包 EnterRoom
+  one.EnterRoom enterRoom = 1;
+}
+
+// 玩家信息
+// 同一个message的每一个字段都有唯一一个编号，建议这个编号不要改变
+message UserInfo {
+  uint32 uid = 1;
+  repeated int32 cardSet = 2;  // repeated 数组类型（slice of type）
+  CardType cardType = 3;
+
+  // oneof 最多允许这一组中的一个字段出现 类似于union共用体
+  oneof honorSet {
+    Honor honor = 4;
+    string tab = 5;
+
+    // oneof 字段不能同时使用 repeated
+    // repeated int32 score = 6;
+  }
+
+  // 不使用这些字段 6 8 ~ 10 （保留字段）
+  reserved 6, 8 to 10;
+
+  // map类型
+  map<int64, string> values = 7;
+
+  // message 也可以作为字段的类型值
+  CardSetList handCard = 11;
+
+  // Result 不需要共用 可以考虑这样定义
+  message Result {
+    uint32 score = 1;
+    string title = 2;
+  }
+  Result result = 12;
+}
+
+message  CardSetList {
+  repeated int32 cardSet = 1;
+  CardType cardType = 2;
+//  UserInfo.Result result = 3;  // 这样引用
+}
+
+// 枚举类型
+enum CardType {
+  // 枚举类型以int32表示的
+  Single = 0;    // 第一个枚举字段必须是0
+  Double = 1;
+}
+
+// 荣誉
+enum Honor {
+  // 允许字段编号重复
+  option allow_alias = true;
+  Win = 0;
+  Lose = 1;
+  LoseWin = 1;
+}

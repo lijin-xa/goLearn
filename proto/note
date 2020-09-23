@@ -1,0 +1,25 @@
+protobuf - 笔记（记录遇到的坑）
+
+protoc 编译指令
+protoc --go_out=. --proto_path=. *.proto
+go_out 指定go代码的输出路径
+proto_path 指定查找proto文件的根目录 （省略的话就是搜索当前目录）
+*.proto 指定编译*.proto文件 也可以指定编译的 xx.proto文件
+
+WARNING: Missing 'go_package' option in "xx.proto"
+需要使用 option go_package = "packageName" 指定go包名 （需要加入完成的导入路径./）
+
+WARNING: Deprecated use of 'go_package' option without a full import path in "one.proto", please specify:
+        option go_package = ".;one";
+不建议在使用 optine go_package 选项没有一个完整的导入路径 ".;one" .为路径 ;号后为指定包名
+
+syntax "proto3" 版本定义(默认是proto2)
+
+在proto3中使用option （proto3中默认为optional）
+The 'optional' keyword should not be specified in proto3 (fields are optional by default)
+
+import 导入proto包
+
+gogo库
+gogo库基于官方库的开发，增加了很多的功能
+一般使用最多还是第三方实现的库gogo/protobuf
