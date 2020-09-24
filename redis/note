@@ -1,0 +1,52 @@
+Redis 笔记
+Redis是一个开源的，内存中的数据结构存储系统，它可以用作数据库、缓存和中间件
+
+redis学习 - 目前是官网学习
+1 - 支持的数据结构类型
+strings - 字符串
+
+SET key value 设置键值对
+GETSET key value 自动将key对应到value并且返回原来key对应的value
+INCR key 对存储在指定key的数值执行原子的加1操作
+
+DEL key 删除键
+
+EXPIRE
+expire 设置key的过期时间，超过时间后会自动删除该key
+expire key 10 10秒过期
+Redis 2.6开始 过期时间误差缩小到0-1毫秒 使用unix时间戳（毫秒）存储
+需要注意 如果两台时间不同步的主机同步RDB文件，过期时间就会变得不可控
+
+PERSIST
+persist 移除给定key的生存时间
+
+INFO 返回关于redis服务器的各种信息和统计数值
+通过给定的可选参数section
+比如:
+server Redis服务器相关的的信息
+clients 已连接的客户端的信息
+memory 则是内存使用情况
+
+KETS 查找所有符合给定模式pattern（正则表达式）的key
+
+TYPE 返回key所存储的value的数据类型 key不存在返回none
+
+Redis并不是简单的key-value存储，实际上他是一个数据结构服务器
+14个redis命令组 200多个redis命令
+二进制安全的字符串
+Lists - 列表
+按插入顺序排序的字符串元素的集合 链表
+
+Sets - 集合
+不重复且无序的字符串元素的集合
+
+Sorted sets - 有序集合
+类似于Sets， 每一个字符串元素都会关联到 一个叫score浮动数值，
+并且通过score排序，它可以检索到一系列元素
+
+Hashes - 散列
+由field和关联的value组成的map filed和value都是字符串
+
+Redis key值是二进制安全的，这意味着可以用任何二进制序列作为key值
+Strings - 字符串
+
