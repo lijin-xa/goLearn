@@ -72,17 +72,17 @@ func OperateTest(client *mongo.Client) {
 		updateResult.ModifiedCount)
 
 	// 查找文档
-	//var checkResult Trainer
-	//err = collection.FindOne(context.TODO(), filter).Decode(checkResult)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//fmt.Printf("Found a single document: %+v\n", checkResult)
-	//
-	//// 删除文档
-	//deleteResult, err2 := collection.DeleteOne(context.TODO(), filter)
-	//if err2 != nil {
-	//	log.Fatal(err)
-	//}
-	//fmt.Printf("Delete %v document in the trainers collection\n", deleteResult.DeletedCount)
+	var checkResult Trainer
+	err = collection.FindOne(context.TODO(), filter). Decode(&checkResult)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Found a single document: %+v\n", checkResult)
+
+	// 删除文档
+	deleteResult, err2 := collection.DeleteOne(context.TODO(), filter)
+	if err2 != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Delete %v document in the trainers collection\n", deleteResult.DeletedCount)
 }
