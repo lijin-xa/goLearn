@@ -12,8 +12,14 @@
 package main
 
 import (
+	"context"
+	"fmt"
+	"github.com/go-redis/redis/v8"
 	"test/function"
+	"test/goroutine"
 	_interface "test/interface"
+	_package "test/package"
+	_redis "test/redis"
 	_struct "test/struct"
 )
 
@@ -21,15 +27,28 @@ import (
 //	fmt.Println("sorry my first come out")
 //}
 
+func testRedis() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "192.168.196.50:6007",
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
+	pong, err := rdb.Ping(context.Background()).Result()
+	fmt.Println(pong, err)
+	// Output: PONG <nil>
+}
+
+// 主入口函数
 func main() {
-	callInterface()
+	// 调用mongodb包
+	//mongodb.Start()
+	// 调用redis包
+	_redis.Start()
+
+	//callGoroutine()
+	//callPackage()
+	//callInterface()
 	//callStruct()
-	// 输出编写第一个
-	//code.PrintGo()
-	//num := add.Add(3, 5)
-	//fmt.Println(num)
-	//fmt.Println(mul.Mul(3, 5))
-	//add.Test()
 }
 
 // 调用function包
@@ -51,4 +70,16 @@ func callStruct() {
 func callInterface() {
 	//_interface.Start()
 	_interface.StartSort()
+}
+
+// 调用 package包
+func callPackage() {
+	//_package.StartTime()
+	//_package.StartOs()
+	_package.StartFlag()
+}
+
+// 调用goroutine包
+func callGoroutine() {
+	goroutine.Start()
 }
