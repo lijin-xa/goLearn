@@ -1,4 +1,4 @@
-package must
+package main
 
 import (
 	"fmt"
