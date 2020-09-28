@@ -15,11 +15,12 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-redis/redis/v8"
+	"test/file"
 	"test/function"
 	"test/goroutine"
 	_interface "test/interface"
+	"test/mysql"
 	_package "test/package"
-	_redis "test/redis"
 	_struct "test/struct"
 )
 
@@ -43,12 +44,15 @@ func main() {
 	// 调用mongodb包
 	//mongodb.Start()
 	// 调用redis包
-	_redis.Start()
+	//_redis.Start()
+	// 调用mysql包
+	mysql.Start()
 
 	//callGoroutine()
 	//callPackage()
 	//callInterface()
 	//callStruct()
+	//callFile()
 }
 
 // 调用function包
@@ -82,4 +86,9 @@ func callPackage() {
 // 调用goroutine包
 func callGoroutine() {
 	goroutine.Start()
+}
+
+// 调用文件包
+func callFile() {
+	file.Start()
 }
