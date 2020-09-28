@@ -128,7 +128,6 @@ func insertDemo() {
 // 删除练习
 func deleteDemo() {
 	// 删除一条数据
-
 	filter := bson.M{"_id": 3}
 	result, err := collection.DeleteOne(ctx, filter)
 	if err != nil {
