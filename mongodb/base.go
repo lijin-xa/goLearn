@@ -139,11 +139,19 @@ func deleteDemo() {
 
 // 修改文档练习
 func updateDemo() {
-	filter := bson.M{"_id": "2"}
-	update := bson.M{"name": "go"}
+	// 目前只了解到这种bson.D bson文档这个格式的修改格式
+	// 查询过滤条件
+	filter := bson.D{{"_id", 2}}
 
-	// TODO update bson 暂时还有些问题
-	// mongo.UpdateResult
+	// 更新
+	update := bson.D{
+		// set 赋值
+		{"$set", bson.D{
+		{"name", "go"},
+		}},
+	}
+
+	// result - mongo.UpdateResult
 	result, err := collection.UpdateOne(ctx, filter, update)
 	if err != nil {
 		fmt.Printf("update failed, err %s\n", err)
