@@ -20,6 +20,7 @@ func initClient() (err error) {
 
 	_, err = rdb.Ping(ctx).Result()
 	if err != nil {
+		fmt.Printf("connection failed, err%s\n", err)
 		return err
 	}
 
@@ -36,8 +37,10 @@ func Start() {
 
 	//redisExample()
 	//stringDemo()
+	//hashesDemo()
 
-	hashesDemo()
+	// 集合操作练习
+	setsDemon()
 }
 
 // set/get基本示例
@@ -129,3 +132,74 @@ func hashesDemo() {
 	value2 := rdb.HDel(ctx, "myhash", "name1")
 	fmt.Println(value2.Result())
 }
+
+// Sets集合数据操作 （无序集合）
+func setsDemon() {
+	// 插入成员
+	addSetMember()
+	// 移出成员
+	moveSetMember()
+	// 查看成员
+	seeSetMember("set1")
+}
+
+// 添加成员
+func addSetMember() {
+	resInt := rdb.SAdd(ctx, "set1", "c++")
+	//result := rdb.SAdd(ctx, "set1", []string {"go", "lua"})
+	num, err := resInt.Result()
+	if err != nil {
+		fmt.Printf("add members failed, err%s\n", err)
+	}
+	fmt.Printf("add %d members\n", num)
+}
+
+// 移出成员
+func moveSetMember() {
+	resBool := rdb.SMove(ctx, "set1", "set2", "c++")
+	isSuc, err := resBool.Result()
+	if err != nil {
+		fmt.Printf("move member failed, err %s\n", err)
+		return
+	}
+	fmt.Printf("move member, %v\n", isSuc)
+	seeSetMember("set1")
+}
+
+
+// 查看集合中的成员
+func seeSetMember(key string) {
+	result := rdb.SMembers(ctx, key)
+	strings, err := result.Result()
+	if err != nil {
+		fmt.Printf("get members failed, err %s\n", err)
+		return
+	}
+	fmt.Println("set members: ", strings)
+}
+
+// Sorted Sets 有序集合 - 成员都是唯一的不允许有重复
+func sortedSetsDemon() {
+	// 每个元素除了对应的值以外，还会多出一个分数 - 浮点数
+	// 依赖分数进行排序
+	// 集合是通过hash表实现的
+}
+
+// TODO 如何实现一个接口？
+/*
+type name interface {
+	String ()
+ }
+
+type jam struct {
+}
+
+func (j *jam) String () {
+	fmt.Println("this is my string")
+}
+
+func StartName() {
+	var j = new(jam)
+	j.String()
+}
+*/
