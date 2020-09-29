@@ -34,13 +34,14 @@ func Start() {
 		fmt.Println("initClient failure ", err)
 		return
 	}
-
 	//redisExample()
 	//stringDemo()
 	//hashesDemo()
 
 	// 集合操作练习
-	setsDemon()
+	//setsDemon()
+	// 有序集合练习
+	sortedSetsDemo()
 }
 
 // set/get基本示例
@@ -175,6 +176,64 @@ func seeSetMember(key string) {
 		return
 	}
 	fmt.Println("set members: ", strings)
+}
+
+// 有序集合操作
+func sortedSetsDemo() {
+	// 添加成员
+	addSortedSetMember()
+	// 删除成员
+	RemSortedSetMember()
+	//seeSortedSetMember()
+	// 查看成员
+	//seeSortedSetMember1()
+}
+
+// 添加成员
+func addSortedSetMember() {
+	sortSet1 := &redis.Z{Member: "one", Score: 1}
+	sortSet2 := &redis.Z{Member: "two", Score: 2}
+	resInt := rdb.ZAdd(ctx, "sort1", sortSet1, sortSet2)
+	num, err := resInt.Result()
+	if err != nil {
+		fmt.Printf("Sorted Sets add members, err%s\n", err)
+		return
+	}
+	fmt.Printf("Sorted Sets add %d member\n", num)
+}
+
+// 删除成员
+func RemSortedSetMember() {
+	resInt := rdb.ZRem(ctx, "sort1", "two")
+	num, err := resInt.Result()
+	if err != nil {
+		fmt.Printf("Sorted Sets remove member, err %s\n", err)
+		return
+	}
+	fmt.Printf("Sorted Sets remove %d member\n", num)
+	seeSortedSetMember1()
+}
+
+// 查看有序集合成员
+func seeSortedSetMember() {
+	resString := rdb.ZRange(ctx, "sort1", 0, -1)
+	str, err := resString.Result()
+	if err != nil {
+		fmt.Printf("Sorted Sets see, err%s\n", err)
+		return
+	}
+	fmt.Printf("Sorted Sets members %s\n", str)
+}
+
+// 查看有序结合成员带Score
+func seeSortedSetMember1() {
+	resSlice := rdb.ZRangeWithScores(ctx, "sort1", 0, -1)
+	sli, err := resSlice.Result()
+	if err != nil {
+		fmt.Printf("Sorted Sets see, err%s\n", err)
+		return
+	}
+	fmt.Printf("Sorted Sets members %v\n", sli)
 }
 
 // Sorted Sets 有序集合 - 成员都是唯一的不允许有重复
