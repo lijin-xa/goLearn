@@ -67,7 +67,7 @@ func stringDemo() {
 
 	// GetRange 返回 start ~ end 对应key value的子串
 	// 下标 0第一位 -1最后一位
-	value = rdb.GetRange(ctx, "name", 1,-1)
+	value = rdb.GetRange(ctx, "name", 1, -1)
 	fmt.Println(value.Val())
 
 	// MGet 返回所有指定key的value 不存在仍会返回一个nil
@@ -77,7 +77,7 @@ func stringDemo() {
 	}
 	// MSet 同MGet操作原理
 	// MSetNX 给定对应的keys设置相应的values 如果其中一个key已经存在，操作都不会执行
-	values := map[string]interface{} {
+	values := map[string]interface{}{
 		"name3": "lijin3",
 		"name4": "lijin4",
 	}
@@ -106,8 +106,8 @@ func stringDemo() {
 	fmt.Println(value1.Val())
 
 	// 给key设置新value 并返回旧的value
-	value2 := rdb.GetSet(ctx,"num", 5)
-	fmt.Println("old value: ", value2.Val(), " new value: ", rdb.Get(ctx,"num").Val())
+	value2 := rdb.GetSet(ctx, "num", 5)
+	fmt.Println("old value: ", value2.Val(), " new value: ", rdb.Get(ctx, "num").Val())
 
 	// 指定浮点数增加
 	value3 := rdb.IncrByFloat(ctx, "num", 0.1)
@@ -121,8 +121,8 @@ func stringDemo() {
 // 哈希数据操作
 func hashesDemo() {
 	// 设置key指定的哈希集中的指定字段的值
-	rdb.HSet(ctx, "myhash", []string {"name", "lijin"})
-	rdb.HSet(ctx, "myhash", []string {"name1", "lijin1"})
+	rdb.HSet(ctx, "myhash", []string{"name", "lijin"})
+	rdb.HSet(ctx, "myhash", []string{"name1", "lijin1"})
 
 	// key 对应指定的哈希集 从哈希值找到对应的字段
 	value1 := rdb.HGet(ctx, "myhash", "name")
@@ -165,7 +165,6 @@ func moveSetMember() {
 	fmt.Printf("move member, %v\n", isSuc)
 	seeSetMember("set1")
 }
-
 
 // 查看集合中的成员
 func seeSetMember(key string) {
